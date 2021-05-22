@@ -1,0 +1,76 @@
+
+
+/* Create a table called NAMES */
+CREATE TABLE Tbl_team(Team_ID integer PRIMARY KEY, Team_Name text);
+
+/* Create few records in this table */
+INSERT INTO Tbl_team VALUES(NULL,'Chelsea');
+INSERT INTO Tbl_team VALUES(NULL,'Arsenal');
+INSERT INTO Tbl_team VALUES(NULL,'Leicester City');
+INSERT INTO Tbl_team VALUES(NULL,'Southampton');
+INSERT INTO Tbl_team VALUES(NULL,'Tottenham Hotspur');
+INSERT INTO Tbl_team VALUES(NULL,'Brighton and Hove Albion');
+INSERT INTO Tbl_team VALUES(NULL,'Watford');
+INSERT INTO Tbl_team VALUES(NULL,'Norwich City');
+INSERT INTO Tbl_team VALUES(NULL,'Sheffield United');
+INSERT INTO Tbl_team VALUES(NULL,'Wolverhampton Wanderers');
+INSERT INTO Tbl_team VALUES(NULL,'Manchester United');
+INSERT INTO Tbl_team VALUES(NULL,'Burnley');
+INSERT INTO Tbl_team VALUES(NULL,'Liverpool');
+INSERT INTO Tbl_team VALUES(NULL,'Everton');
+INSERT INTO Tbl_team VALUES(NULL,'Aston Villa');
+INSERT INTO Tbl_team VALUES(NULL,'Manchester City');
+INSERT INTO Tbl_team VALUES(NULL,'Newcastle United');
+INSERT INTO Tbl_team VALUES(NULL,'Bournemouth');
+INSERT INTO Tbl_team VALUES(NULL,'Crystal Palace');
+INSERT INTO Tbl_team VALUES(NULL,'West Ham United');
+/* Display all the records from the table */
+-- SELECT * FROM Tbl_team;
+
+
+CREATE TABLE Tbl_result(Team_ID integer PRIMARY KEY, W,D,L,F,A integer);
+INSERT INTO Tbl_result VALUES(NULL,20,6,12,69,54);
+INSERT INTO Tbl_result VALUES(NULL,14,14,10,56,48);
+INSERT INTO Tbl_result VALUES(NULL,18,8,12,67,41);
+INSERT INTO Tbl_result VALUES(NULL,15,7,16,51,60);
+INSERT INTO Tbl_result VALUES(NULL,16,11,11,61,47);
+INSERT INTO Tbl_result VALUES(NULL,9,14,15,39,54);
+INSERT INTO Tbl_result VALUES(NULL,8,10,20,36,64);
+INSERT INTO Tbl_result VALUES(NULL,5,6,27,26,75);
+INSERT INTO Tbl_result VALUES(NULL,14,12,12,39,39);
+INSERT INTO Tbl_result VALUES(NULL,15,14,9,51,40);
+INSERT INTO Tbl_result VALUES(NULL,18,12,8,66,36);
+INSERT INTO Tbl_result VALUES(NULL,15,9,14,43,50);
+INSERT INTO Tbl_result VALUES(NULL,32,3,3,85,33);
+INSERT INTO Tbl_result VALUES(NULL,13,10,15,44,56);
+INSERT INTO Tbl_result VALUES(NULL,9,8,21,41,67);
+INSERT INTO Tbl_result VALUES(NULL,26,3,9,102,35);
+INSERT INTO Tbl_result VALUES(NULL,11,11,16,38,58);
+INSERT INTO Tbl_result VALUES(NULL,9,7,22,40,65);
+INSERT INTO Tbl_result VALUES(NULL,11,10,17,31,50);
+INSERT INTO Tbl_result VALUES(NULL,10,9,19,49,62);
+
+
+
+
+
+-- SELECT * FROM Tbl_result;
+CREATE TABLE standings(Team_ID,Team_Name,W,D,L,F,A,GD,Pts integer);
+
+INSERT INTO standings 
+SELECT Tbl_team.Team_ID,Tbl_team.Team_Name,Tbl_result.W,Tbl_result.D,Tbl_result.L,Tbl_result.F,Tbl_result.A, (Tbl_result.F - Tbl_result.A) as GD,  (Tbl_result.W * 3 + Tbl_result.D) as Pts 
+FROM Tbl_team 
+INNER JOIN Tbl_result ON Tbl_team.Team_ID = Tbl_result.Team_ID
+ORDER BY Pts DESC, GD DESC;
+
+
+SELECT rowid,Team_Name,W,D,L,F,A,GD,Pts FROM standings;
+
+
+
+
+
+
+
+
+
